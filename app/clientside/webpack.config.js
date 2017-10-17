@@ -8,8 +8,8 @@ var config = {
     path.resolve(__dirname, 'src/entry.js')
   ],
   output: {                                       // 定义出口目录
-    path: path.resolve(__dirname, '../../public/'),
-    filename: 'javascripts/[name].js',
+    path: path.resolve(__dirname, '../../public/dist'),
+    filename: '[name].js',
     publicPath: 'dist'
   },
   resolve: {                                      // resolve 指定可以被 import 的文件后缀
@@ -35,7 +35,7 @@ var config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('stylesheets/[name].css'),
+    new ExtractTextPlugin('[name].css'),
     new webpack.DefinePlugin({
         'process.env': {
             'NODE_ENV': JSON.stringify('dev') 
