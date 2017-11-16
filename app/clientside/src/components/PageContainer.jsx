@@ -2,13 +2,13 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import 'reset-css/reset.css';
 
-import HomePage from './HomePage/HomePage.jsx';
+import HomePage from './HomePage/HomePage';
 
 export default class PageContainer extends React.Component {
 
 	renderPageComponent() {
 		switch (this.props.pageType) {
-			case 'home': return (<HomePage {...this.props.pageParams} />);
+			case 'Home': return (<HomePage {...this.props.pageParams} />);
 			default: return null;
 		}
 	}

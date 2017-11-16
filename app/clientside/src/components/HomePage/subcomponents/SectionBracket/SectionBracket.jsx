@@ -21,7 +21,7 @@ class SectionBracket extends React.PureComponent {
 
 SectionBracket.propTypes = {
 	name: PropTypes.string,
-	direction: PropTypes.oneOf(['up', 'down']).isRequired,
+	direction: PropTypes.oneOf(['up', 'down']),
 };
 
 SectionBracket.defaultProps = {

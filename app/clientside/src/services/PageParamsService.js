@@ -2,7 +2,7 @@
 export function GetPageParams(){
 	if (pageConfig){
 		switch (pageConfig.pageType){
-			case 'home': return homePageParams;
+			case 'Home': return homePageParams;
 			default: return {};
 		}
 	}

@@ -27,7 +27,14 @@ class CenterCroppedImage extends React.PureComponent {
 	}
 };
 
+CenterCroppedImage.propTypes = {
+	className: PropTypes.string,
+	isLazyload: PropTypes.bool,
+	preloadColor: PropTypes.string,
+};
+
 CenterCroppedImage.defaultProps = {
+	className: '',
 	isLazyload: false,
   	preloadColor: '#000000',
 };

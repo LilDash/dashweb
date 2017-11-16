@@ -7,7 +7,7 @@ export class HeaderLogo extends React.PureComponent {
 	render() {
 		return (
 			<div className='header-logo'>
-				<span>DashEye</span>
+				<span>D-Planet</span>
 			</div>
 		);
   	}

@@ -14,11 +14,10 @@ export class Hero extends React.Component {
   	}
 }
 
-// homeParams.propTypes = {
-// 	imageSrc: PropTypes.string.isRequired,
-// 	preloadColor: PropTypes.string.isRequired,
-// };
+Hero.propTypes = {
+	imageSrc: PropTypes.string.isRequired,
+	preloadColor: PropTypes.string.isRequired,
+};
 
-// homeParams.defaultProps = {
-// 	preloadColor: '#000000',
-// };
+Hero.defaultProps = {
+};

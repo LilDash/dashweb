@@ -20,7 +20,7 @@ class HighlightNavItem extends React.PureComponent {
 
 		
 		return (
-			<div className='highlight-nav-item' >
+			<div className='highlight-nav-item' data-href={ this.props.href }>
 				<CenterCroppedImage 
 					className='highlight-nav-item-img' 
 					src={ this.props.imageSrc }
@@ -42,12 +42,12 @@ HighlightNavItem.propTypes = {
   	imageSrc: PropTypes.string.isRequired,
   	title: PropTypes.string.isRequired,
   	description: PropTypes.string.isRequired,
-  	href: PropTypes.string.isRequired,
+  	href: PropTypes.string,
   	imagePreloadColor: PropTypes.string,
 };
 
 HighlightNavItem.defaultProps = {
-  	
+  	href: '',
 };
 
 export { HighlightNavItem };

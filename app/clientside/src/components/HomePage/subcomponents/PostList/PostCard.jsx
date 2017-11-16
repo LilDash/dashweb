@@ -20,7 +20,7 @@ class PostCard extends React.PureComponent {
 
 		
 		return (
-			<div className='post-card' data-id='{this.props.id}'>
+			<div className='post-card' data-id={this.props.id}>
 				<div className='post-card-img-box'>
 					<CenterCroppedImage 
 						className='post-card-img' 

@@ -31,9 +31,15 @@ var config = {
             fallback: 'style-loader', // backup loader when not building .css file
             use: ['css-loader', 'sass-loader'] // loaders to preprocess CSS
         })
-      }
+      },
+      {
+        test: /\.js|jsx$/, 
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
+      },
     ]
   },
+
   plugins: [
     new ExtractTextPlugin('[name].css'),
     new webpack.DefinePlugin({

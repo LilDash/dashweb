@@ -7,14 +7,14 @@ class LazyloadImage extends React.PureComponent {
 
 	constructor(props) {
 	    super(props);
-	    this.imageOnLoad = this.imageOnLoad.bind(this);
+	    this.handleImageOnLoad = this.handleImageOnLoad.bind(this);
 	    this.state = {
 	      isImageDisplayed: false,
 	    };
 	  }
 
 
-	imageOnLoad() {
+	handleImageOnLoad() {
 		this.setState({isImageDisplayed: true});
 	}
 
@@ -33,20 +33,27 @@ class LazyloadImage extends React.PureComponent {
 				<img 
 					className='lazyload-image-preloader'
 					src={ this.props.src }
-					onLoad={ this.imageOnLoad }
+					onLoad={ this.handleImageOnLoad }
 				/>
-				<div className={ this.state.isImageDisplayed ? 'lazyload-image-foreground show' : 'lazyload-image-foreground'} style={ imageStype }></div>
+				<div 
+					className={ 
+						this.state.isImageDisplayed ? 'lazyload-image-foreground show' : 'lazyload-image-foreground'
+					} 
+					style={ imageStype } 
+				/>
 			</div>
 		);
 	}
 };
 
 LazyloadImage.propTypes = {
+	className: PropTypes.string,
   	src: PropTypes.string.isRequired,
   	preloadColor: PropTypes.string,
 };
 
 LazyloadImage.defaultProps = {
+	className: '',
   	preloadColor: '#000000',
 };
 

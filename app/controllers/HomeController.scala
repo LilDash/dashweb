@@ -1,8 +1,11 @@
 package controllers
 
 import javax.inject._
+
+import common.enums.{LanguageEnum, PageTypeEnum}
 import play.api._
 import play.api.mvc._
+import viewModels.HomePageViewModel
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -19,6 +22,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
    * a path of `/`.
    */
   def index() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.home())
+    val vm = HomePageViewModel(PageTypeEnum.Home, LanguageEnum.zh)
+    Ok(views.html.home(vm))
   }
 }

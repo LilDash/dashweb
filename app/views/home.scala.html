@@ -1,11 +1,12 @@
-@()
+@import viewModels._
+@(vm: HomePageViewModel)
 
 @scripts = {
     <script type="text/javascript">
 
     	var pageConfig = pageConfig || {
-    		pageType: 'home',
-    		language: 'zh-cn',
+    	    pageType: '@vm.pageType.toString()',
+    		language: '@vm.language.toString()',
     	};
 
     	var homePageParams = {};
