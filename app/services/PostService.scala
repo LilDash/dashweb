@@ -1,23 +1,33 @@
 package services
 
-import models.{Post, Posts}
+import models.repositories.PostRepository
+import models.Post
+import play.api.libs.json.{Json, Writes}
+
 import scala.concurrent.Future
 
 object PostService {
 
   def addPost(post: Post): Future[String] = {
-    Posts.add(post)
+    PostRepository.add(post)
   }
 
   def deletePost(id: Long): Future[Int] = {
-    Posts.delete(id)
+    PostRepository.delete(id)
   }
 
   def getPost(id: Long): Future[Option[Post]] = {
-    Posts.get(id)
+    PostRepository.get(id)
   }
 
   def listAllPosts: Future[Seq[Post]] = {
-    Posts.listsAll
+    PostRepository.listsAll
   }
+
+  def getNLatestPosts(n: Int): Future[Seq[Post]] = {
+    PostRepository.getNLatest(n)
+  }
+
+
+
 }

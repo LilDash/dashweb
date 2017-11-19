@@ -1,0 +1,20 @@
+@import viewModels._
+@(vm: AdminHomePageViewModel)
+
+@scripts = {
+    <script type="text/javascript">
+
+    	var pageConfig = pageConfig || {
+    	    pageType: '@vm.pageType.toString()',
+    		  language: '@vm.language.toString()',
+    	};
+
+    	var adminHomePageParams = {};
+
+
+    </script>
+}
+
+@admin("Admin", scripts) {
+  <h1>Welcome to Dash's Web!</h1>
+}

@@ -4,11 +4,11 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
   watch: true,
-  entry: [
-    path.resolve(__dirname, 'src/entry.js')
-  ],
+  entry: {
+    'main': path.resolve(__dirname, 'src/main-entry.js')
+  },
   output: {                                       // 定义出口目录
-    path: path.resolve(__dirname, '../../public/dist'),
+    path: path.resolve(__dirname, '../../../public/dist'),
     filename: '[name].js',
     publicPath: 'dist'
   },
