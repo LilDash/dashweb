@@ -1,0 +1,10 @@
+@import '../../styles/variables.scss';
+
+.header{
+	width: 100%;
+	height: 65px;
+	background-color: $grey5;
+	border-bottom-color: $theme-green;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+}

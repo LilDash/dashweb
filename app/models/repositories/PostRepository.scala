@@ -17,9 +17,11 @@ object PostRepository {
 
   val posts = TableQuery[PostTableDef]
 
-  def add(post: Post): Future[String] = {
-    dbConfig.db.run(posts += post).map(res => "Post successfully added").recover {
-      case ex: Exception => ex.getCause.getMessage()
+  def save(post: Post): Future[Int] = {
+    dbConfig.db.run(posts.insertOrUpdate(post)).map(res =>
+      res
+    ).recover {
+      case _: Exception => 0 //ex.getCause.getMessage()
     }
   }
 
@@ -37,7 +39,7 @@ object PostRepository {
 
   def getNLatest(n: Int): Future[Seq[Post]] = {
     val action = posts.filter(p =>
-      p.isPublish && p.isReviewed
+      p.isPublished && p.isReviewed
     ).sortBy(_.id.desc).take(n).result
     dbConfig.db.run(action)
   }

@@ -2,14 +2,10 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 
-import common.enums.{LanguageEnum, PageTypeEnum}
-import play.api.libs.json.{JsValue, Json}
+import play.api.libs.json.{Json}
 import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Request}
-import viewModels.HomePageViewModel
 import services.PostService
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-import models.Post
 
 @Singleton
 class ApiController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {

@@ -1,0 +1,56 @@
+@import '../../../../styles/variables.scss';
+
+$heroHeight: 500px;
+
+.article-hero {
+	display: block;
+	width: 100%;
+	height: $heroHeight;
+
+	&-overlay {
+		display: block;
+		width: 100%;
+		height: $heroHeight;
+		position: absolute;
+		transform: translateY(-$heroHeight);
+		background: -prefix-linear-zgradient(top, $transparent 20%, $grey4); 
+		background: linear-gradient(to bottom, $transparent 20%, $black);
+	}
+
+	.article-hero-inner {
+		display: block;
+		width:$main-width;
+		height: $heroHeight/2;
+		margin: 0 auto;
+	    transform: translateY(-250px);
+	    
+	    h1{
+			font-size: 28px;
+		    color: $white;
+		    line-height: 1.4;
+		    text-shadow: 2px 2px 2px $grey5;
+		}
+
+		.article-meta {
+			position: absolute;
+			bottom: 50px;
+			color: $grey1;
+			font-size: 14px;
+
+			&-category {
+				background-color: $theme-green;
+				display: inline-block;			
+			    border-radius: 4px;
+			    padding: 6px 12px;
+			    color: $grey0;
+			}
+
+			&-time{
+				margin-left: 30px;
+			}
+		}
+	}
+
+	
+}
+

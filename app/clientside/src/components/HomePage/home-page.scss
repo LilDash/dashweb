@@ -1,0 +1,10 @@
+@import '../../styles/variables.scss';
+
+.home-page {
+	&-body{
+		width:$main-width;
+		margin: 0 auto;
+		z-index: 10;
+		position: relative;
+	}
+}

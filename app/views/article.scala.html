@@ -1,0 +1,32 @@
+@import viewModels._
+@(vm: ArticlePageViewModel)
+
+@scripts = {
+<script type="text/javascript">
+
+    	var pageConfig = pageConfig || {
+    	    pageType: '@vm.pageType.toString()',
+    		language: '@vm.language.toString()',
+    	};
+
+    	var articlePageParams = {};
+
+    	articlePageParams.articleHero = {
+    		imageSrc: '@routes.Assets.versioned("images/hero.jpg")',
+    		preloadColor: '#aaaaaa',
+    		title: '@vm.article.title',
+    		category: '旅游',
+    	    publishTime: '@vm.article.publishTime'
+    	};
+
+    	articlePageParams.articleBody = {
+            content: '@Html(vm.article.content)'
+    	}
+
+
+</script>
+}
+
+@main("Dash Web", scripts) {
+<h1>Welcome to Dash's Web!</h1>
+}

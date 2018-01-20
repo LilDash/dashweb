@@ -1,5 +1,7 @@
 package models.dal
 
+import java.sql.Timestamp
+
 import models.Post
 import slick.jdbc.MySQLProfile.api._
 
@@ -8,9 +10,9 @@ class PostTableDef(tag: Tag) extends Table[Post](tag, "post"){
   def title = column[String]("title")
   def content = column[String]("content")
   def authorId = column[Int]("author_id")
-  def publishTime = column[String]("publish_time")
-  def updateTime = column[String]("update_time")
-  def isPublish = column[Boolean]("is_published")
+  def publishTime = column[Timestamp]("publish_time")
+  def updateTime = column[Timestamp]("update_time")
+  def isPublished = column[Boolean]("is_published")
   def isReviewed = column[Boolean]("is_reviewed")
   def categoryId = column[Int]("category_id")
 
@@ -22,7 +24,7 @@ class PostTableDef(tag: Tag) extends Table[Post](tag, "post"){
       authorId,
       publishTime,
       updateTime,
-      isPublish,
+      isPublished,
       isReviewed,
       categoryId
     ) <> ((Post.apply _).tupled, Post.unapply)

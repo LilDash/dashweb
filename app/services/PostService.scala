@@ -8,8 +8,8 @@ import scala.concurrent.Future
 
 object PostService {
 
-  def addPost(post: Post): Future[String] = {
-    PostRepository.add(post)
+  def savePost(post: Post): Future[Int] = {
+    PostRepository.save(post)
   }
 
   def deletePost(id: Long): Future[Int] = {

@@ -1,0 +1,4 @@
+# Application dependencies
+
+require:
+    com.qiniu -> qiniu-java-sdk [7.0.0, 7.2.99]

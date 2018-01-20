@@ -4,11 +4,18 @@
 # ~~~~
 
 GET     /                           controllers.HomeController.index
-GET     /admin                      controllers.AdminController.index
+GET     /a/:id                      controllers.ArticleController.index(id: Long)
 
 # Api
 GET     /api/homePagePosts          controllers.ApiController.homePagePosts
 
+GET    /api/admin/getCurrentUser    controllers.AdminController.getCurrentUser
+POST    /api/admin/login            controllers.AdminController.login
+POST    /api/admin/post/select      controllers.AdminController.selectPosts
+POST    /api/admin/post/insert      controllers.AdminController.insertPost
+POST    /api/admin/getUploadFileToken controllers.AdminController.getUploadFileToken
+POST    /api/admin/post/update        controllers.AdminController.updatePost
+GET     /api/admin/post/delete      controllers.AdminController.deletePost
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+
+.footer{
+	background-color: $grey5;
+	min-height: 200px;
+	text-align: center;
+
+	&-inner{
+		width: $main-width;
+		margin: 0 auto;
+		padding: 20px 0px 20px 0px;
+		font-size: 14px;
+		color: $grey0;
+	}
+	
+}
