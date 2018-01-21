@@ -7,13 +7,26 @@
 	position: relative;
 	border-bottom: solid 1px $grey0;
 
+	&:hover .post-card-title{
+		color: $theme-green;
+	}
+
 	&-img-box {
 		display: inline-block;
 		width: 320px;
 
+		@media (max-width: $main-width-default) {
+		    width: 100%;
+		    margin-bottom: 14px;
+		}
+
 		.post-card-img {
 			width: 300px;
 			height: 200px;
+
+			@media (max-width: $main-width-default) {
+			    width: 100%;
+			}
 		}
 
 		.post-card-mark {
@@ -26,6 +39,10 @@
 			margin-left: -40px;
 			margin-top: -180px;
 			box-shadow: 3px 3px 4px 0px $grey3;
+
+			@media (max-width: $main-width-default) {
+			    margin-left: -20px;
+			}
 		}
 	}
 
@@ -33,6 +50,12 @@
 		display: inline-block;
 		position: absolute;
 		padding: 0px 0px 0px 25px;
+
+		@media (max-width: $main-width-default) {
+		    display: block;
+		    position: static;
+		    padding: 0px;
+		}
 
 		.post-card-title {
 			font-size: 20px;
@@ -44,6 +67,9 @@
 		}
 
 		.post-card-summary {
+			@media (max-width: $main-width-default) {
+			    display: none;
+			}
 			margin: 15px 0px;
 		    font-size: 14px;
 		    line-height: 20px;
@@ -53,6 +79,10 @@
 	}
 
 	&-info-box {
+		@media (max-width: $main-width-default) {
+		    display: none;
+		}
+
 		transform: translateY(-100%);
     	margin-left: 340px;
     	font-size: 14px;

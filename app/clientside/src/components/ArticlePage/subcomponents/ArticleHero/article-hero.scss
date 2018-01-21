@@ -1,34 +1,39 @@
 @import '../../../../styles/variables.scss';
 
-$heroHeight: 500px;
+$hero-height: 500px;
 
 .article-hero {
 	display: block;
 	width: 100%;
-	height: $heroHeight;
+	height: $hero-height;
 
 	&-overlay {
 		display: block;
 		width: 100%;
-		height: $heroHeight;
+		height: $hero-height;
 		position: absolute;
-		transform: translateY(-$heroHeight);
+		transform: translateY(-$hero-height);
 		background: -prefix-linear-zgradient(top, $transparent 20%, $grey4); 
 		background: linear-gradient(to bottom, $transparent 20%, $black);
 	}
 
 	.article-hero-inner {
 		display: block;
-		width:$main-width;
-		height: $heroHeight/2;
+		width:$main-width-default;
+		height: $hero-height/2;
 		margin: 0 auto;
 	    transform: translateY(-250px);
+
+	    @media (max-width: $main-width-default) {
+		    width: $main-width-mobile;
+		}
 	    
 	    h1{
 			font-size: 28px;
 		    color: $white;
 		    line-height: 1.4;
 		    text-shadow: 2px 2px 2px $grey5;
+		    margin: 0px 10px;
 		}
 
 		.article-meta {
@@ -36,6 +41,7 @@ $heroHeight: 500px;
 			bottom: 50px;
 			color: $grey1;
 			font-size: 14px;
+			margin: 0px 10px;
 
 			&-category {
 				background-color: $theme-green;

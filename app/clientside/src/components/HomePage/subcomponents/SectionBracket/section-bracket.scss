@@ -9,6 +9,10 @@
 	border-right: solid 2px $theme-green;
 	text-align: center;
 
+	@media (max-width: $main-width-default) {
+	    width: 90%;
+	}
+
 	&.up {
 		border-bottom: solid 2px $theme-green;
 

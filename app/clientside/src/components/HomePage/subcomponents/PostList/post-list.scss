@@ -1,5 +1,11 @@
+@import '../../../../styles/variables.scss';
+
 .post-list {
 	display: block;
-	width: 960px;
+	width: $main-width-default;
 	margin: 50px auto;
+
+	@media (max-width: $main-width-default) {
+	    width: $main-width-mobile;
+	}
 }

@@ -6,11 +6,15 @@
 	text-align: center;
 
 	&-inner{
-		width: $main-width;
+		width: $main-width-default;
 		margin: 0 auto;
 		padding: 20px 0px 20px 0px;
 		font-size: 14px;
 		color: $grey0;
+
+		@media (max-width: $main-width-default) {
+		    width: $main-width-mobile;
+		}
 	}
 	
 }
