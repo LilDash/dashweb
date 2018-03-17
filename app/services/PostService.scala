@@ -8,12 +8,16 @@ import models.{Category, Image, Post, PostDetail}
 import scala.concurrent.Future
 import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.util.matching.Regex
 
 
 @Singleton
 class PostService @Inject()(
                              imageService: ImageService,
                              categoryService: CategoryService){
+
+  val filterHtmlRegx = "&lt;((?!&gt;).)*&gt;".r
+  val summaryLength = 100
 
   def savePost(post: Post): Future[Int] = {
     PostRepository.save(post)
@@ -66,6 +70,8 @@ class PostService @Inject()(
                          titleImage: Option[Image],
                          category: Option[Category]): PostDetail = {
 
+    val summary = getContentSummary(postBase.content)
+
     val (categoryId: Long, categoryName: String) =
     if (category.isDefined) {
       (category.get.id, category.get.name)
@@ -83,7 +89,7 @@ class PostService @Inject()(
     PostDetail(
       postBase.id,
       postBase.title,
-      "TODO",  // TODO: Get summary
+      summary,
       List(), // TODO: get tags
       postBase.content,
       1, // TODO: get author id
@@ -96,6 +102,11 @@ class PostService @Inject()(
       titleImageId,
       titleImageSrc
     )
+  }
+
+  def getContentSummary(content: String): String = {
+    val filtered = filterHtmlRegx.replaceAllIn(content, "")
+    filtered.substring(0, Math.min(filtered.length, summaryLength))
   }
 
 }
