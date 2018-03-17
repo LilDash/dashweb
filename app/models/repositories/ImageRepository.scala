@@ -25,7 +25,7 @@ object ImageRepository {
     }.recover {
       case ex: Exception =>
         Logger.error(ex.getMessage)
-        0
+        0L
     }
   }
 

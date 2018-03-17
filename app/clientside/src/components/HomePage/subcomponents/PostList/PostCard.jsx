@@ -23,11 +23,11 @@ class PostCard extends React.PureComponent {
 				<div className='post-card-img-box'>
 					<CenterCroppedImage 
 						className='post-card-img' 
-						src={ this.props.imageSrc }
+						src={ this.props.titleImageSrc }
 						isLazyload={ true }
 						preloadColor='#009966'
 					/>
-					<span className='post-card-mark'>{ this.props.category }</span>
+					<span className='post-card-category'>{ this.props.categoryName }</span>
 				</div>
 				<div className='post-card-text-box'>
 					<span className='post-card-title'>{ this.props.title }</span>
@@ -49,17 +49,17 @@ class PostCard extends React.PureComponent {
 
 PostCard.propTypes = {
 	id: PropTypes.number.isRequired,
-  	imageSrc: PropTypes.string.isRequired,
-  	category: PropTypes.string.isRequired,
+  	titleImageSrc: PropTypes.string.isRequired,
+  	categoryName: PropTypes.string.isRequired,
   	title: PropTypes.string.isRequired,
   	summary: PropTypes.string.isRequired,
   	publishTime: PropTypes.string.isRequired,
   	tags: PropTypes.array.isRequired,
-  	comments: PropTypes.number.isRequired,
+  	comments: PropTypes.number,
 };
 
 PostCard.defaultProps = {
-  	
+  	comments: 0
 };
 
 export { PostCard };

@@ -84,7 +84,7 @@ class AdminController @Inject()(cc: ControllerComponents,
       val isReviewed = (json \ "isReviewed").as[String].equals("yes")
       val status = if (isPublished && isReviewed) PostStatus.active else PostStatus.inactive
       val titleImageId = (json \ "titleImageId").as[Long]
-      val categoryId = (json \ "category").as[Long]
+      val categoryId = (json \ "categoryId").as[Long]
 
       val date = new Date()
       val time = new Timestamp(date.getTime())

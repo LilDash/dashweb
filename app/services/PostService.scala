@@ -30,15 +30,7 @@ class PostService @Inject()(
   def getPostDetail(id: Long): Future[Option[PostDetail]] = {
     getPost(id).flatMap (post =>
       if (post.isDefined) {
-        val postBase = post.get
-        val getImageF = imageService.getImage(postBase.titleImageId)
-        val getCategoryF = categoryService.getCategory(postBase.categoryId)
-
-        for{
-          image <- getImageF
-          category <- getCategoryF
-        } yield {
-          val postDetail = populatePostDetail(postBase, image, category)
+        getPostDetail(post.get).map { postDetail =>
           Option(postDetail)
         }
       } else {
@@ -47,12 +39,27 @@ class PostService @Inject()(
     )
   }
 
+  def getPostDetail(postBase: Post): Future[PostDetail] = {
+    val getImageF = imageService.getImage(postBase.titleImageId)
+    val getCategoryF = categoryService.getCategory(postBase.categoryId)
+
+    for{
+      image <- getImageF
+      category <- getCategoryF
+    } yield {
+      populatePostDetail(postBase, image, category)
+    }
+  }
+
   def listAllPosts: Future[Seq[Post]] = {
     PostRepository.listsAll
   }
 
-  def getNLatestPosts(n: Int): Future[Seq[Post]] = {
-    PostRepository.getNLatest(n)
+  def getNLatestPosts(n: Int): Future[Seq[PostDetail]] = {
+    PostRepository.getNLatest(n).flatMap { posts: Seq[Post] =>
+      val futures = posts.map(p => getPostDetail(p))
+      Future.sequence(futures)
+    }
   }
 
   def populatePostDetail(postBase: Post,
@@ -63,14 +70,14 @@ class PostService @Inject()(
     if (category.isDefined) {
       (category.get.id, category.get.name)
     } else {
-      (0, "")
+      (0L, "aa")
     }
 
     val (titleImageId: Long, titleImageSrc: String) =
     if (titleImage.isDefined) {
       (titleImage.get.id, titleImage.get.url)
     } else {
-      (0, "")
+      (0L, "")
     }
 
     PostDetail(

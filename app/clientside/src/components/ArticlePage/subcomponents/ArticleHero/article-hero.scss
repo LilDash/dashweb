@@ -1,33 +1,40 @@
 @import '../../../../styles/variables.scss';
 
-$hero-height: 500px;
+$hero-height-default: 500px;
+$hero-height-mobile: 350px;
 
 .article-hero {
 	display: block;
 	width: 100%;
-	height: $hero-height;
+	height: $hero-height-default;
+
+	@media (max-width: $main-width-default) {
+		height: $hero-height-mobile;
+	}
 
 	&-overlay {
 		display: block;
 		width: 100%;
-		height: $hero-height;
+		height: $hero-height-default;
 		position: absolute;
-		transform: translateY(-$hero-height);
+		transform: translateY(-$hero-height-default);
 		background: -prefix-linear-zgradient(top, $transparent 20%, $grey4); 
 		background: linear-gradient(to bottom, $transparent 20%, $black);
+
+		@media (max-width: $main-width-default) {
+			height: $hero-height-mobile;
+			transform: translateY(-$hero-height-mobile);
+		}
+
 	}
 
 	.article-hero-inner {
 		display: block;
 		width:$main-width-default;
-		height: $hero-height/2;
+		height: $hero-height-default/2;
 		margin: 0 auto;
-	    transform: translateY(-250px);
-
-	    @media (max-width: $main-width-default) {
-		    width: $main-width-mobile;
-		}
-	    
+	    transform: translateY(-$hero-height-default/2);
+   
 	    h1{
 			font-size: 28px;
 		    color: $white;
@@ -53,6 +60,16 @@ $hero-height: 500px;
 
 			&-time{
 				margin-left: 30px;
+			}
+		}
+
+		@media (max-width: $main-width-default) {
+			width: $main-width-mobile;
+			height: $hero-height-mobile/2;
+			transform: translateY(-$hero-height-mobile/2);
+			
+			h1 {
+				font-size: 24px;
 			}
 		}
 	}
