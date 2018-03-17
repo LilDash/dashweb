@@ -8,7 +8,9 @@ import services.PostService
 import scala.concurrent.ExecutionContext.Implicits.global
 
 @Singleton
-class ApiController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class ApiController @Inject()(cc: ControllerComponents,
+                              postService: PostService
+                             ) extends AbstractController(cc) {
 
   /**
     * Create an Action to render an HTML page.
@@ -19,11 +21,21 @@ class ApiController @Inject()(cc: ControllerComponents) extends AbstractControll
     */
   def homePagePosts() = Action.async { implicit request: Request[AnyContent] =>
 
-    PostService.getNLatestPosts(10).map { posts =>
+    postService.getNLatestPosts(10).map { posts =>
       val data = Json.obj(
         "posts" -> posts
       )
       Ok(Json.toJson(data))
+    }
+  }
+
+  def post(id: Long) = Action.async { implicit request: Request[AnyContent] =>
+    postService.getPostDetail(id).map { postDetail =>
+      if (postDetail.isDefined) {
+        Ok(Json.toJson(postDetail.get))
+      } else {
+        Ok(Json.toJson(""))
+      }
     }
   }
 

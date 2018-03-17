@@ -15,7 +15,8 @@ import scala.concurrent.ExecutionContext.Implicits.global
   * application's home page.
   */
 @Singleton
-class ArticleController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class ArticleController @Inject()(cc: ControllerComponents,
+                                  postService: PostService) extends AbstractController(cc) {
 
   /**
     * Create an Action to render an HTML page.
@@ -25,7 +26,7 @@ class ArticleController @Inject()(cc: ControllerComponents) extends AbstractCont
     * a path of `/`.
     */
   def index(id: Long) = Action.async { implicit request: Request[AnyContent] =>
-    PostService.getPost(id).map { post =>
+    postService.getPost(id).map { post =>
       if (post.isDefined) {
         val vm = ArticlePageViewModel(PageTypeEnum.Article, LanguageEnum.zh, post.get)
         Ok(views.html.article(vm))

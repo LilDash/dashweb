@@ -7,6 +7,7 @@ export class Footer extends React.Component {
     	<div className='footer'>
     		<div className='footer-inner'>
 	    		<div className='footer-contact'>
+	    		aaa
 	    		</div>
 	    		<p className='footer-icp'>粤xxxxxxxx</p>
 	    		<p className='footer-copyright'>COPYRIGHT 2018 D-PLANET. ALL RIGHTS RESERVED.</p>

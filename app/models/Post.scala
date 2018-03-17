@@ -2,21 +2,21 @@ package models
 
 import java.sql.Timestamp
 
+import common.enums.PostStatus.PostStatus
 import controllers.routes
 import play.api.libs.json.{Json, Writes}
-
-import scala.concurrent.ExecutionContext.Implicits.global
 
 case class Post(
                  id: Long,
                  title: String,
                  content: String,
-                 authorId: Int,
+                 authorId: Long,
                  publishTime: Timestamp,
                  updateTime: Timestamp,
-                 isPublished: Boolean,
-                 isReviewed: Boolean,
-                 categoryId: Int)
+                 status: PostStatus,
+                 categoryId: Long,
+                 titleImageId: Long
+               )
 
 object Post {
   implicit val postWrites = new Writes[Post]{
@@ -30,9 +30,7 @@ object Post {
       "comments" -> 2,
       "category" -> "旅游",
       "summary" -> "一路向北一路向北一路向北一路向北一路向北，一路向北一路向北一路向北，一路向北从最",
-      "imageSrc" -> routes.Assets.versioned("images/nav_blog.jpg").toString(),
-      "isPublished" -> post.isPublished,
-      "isReviewed" -> post.isReviewed
+      "imageSrc" -> routes.Assets.versioned("images/nav_blog.jpg").toString()
     )
   }
 }

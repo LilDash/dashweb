@@ -1,14 +1,16 @@
 package models.repositories
 
+import common.enums.PostStatus
 import models.Post
 import models.dal.PostTableDef
-import play.api.Play
+import play.api.{Logger, Play}
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 import slick.lifted.TableQuery
 
 import scala.concurrent.Future
 import slick.jdbc.MySQLProfile.api._
+
 import scala.concurrent.ExecutionContext.Implicits.global
 
 
@@ -21,7 +23,9 @@ object PostRepository {
     dbConfig.db.run(posts.insertOrUpdate(post)).map(res =>
       res
     ).recover {
-      case _: Exception => 0 //ex.getCause.getMessage()
+      case ex: Exception =>
+        Logger.error(ex.getCause.getMessage())
+        0
     }
   }
 
@@ -39,7 +43,7 @@ object PostRepository {
 
   def getNLatest(n: Int): Future[Seq[Post]] = {
     val action = posts.filter(p =>
-      p.isPublished && p.isReviewed
+      p.status === PostStatus.active.id
     ).sortBy(_.id.desc).take(n).result
     dbConfig.db.run(action)
   }

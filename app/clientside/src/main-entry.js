@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router';
 import PageContainer from './components/PageContainer.jsx';
 import { GetPageParams } from './services/PageParamsService.js';
 
