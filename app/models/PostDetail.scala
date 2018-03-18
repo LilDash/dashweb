@@ -3,6 +3,7 @@ package models
 import java.sql.Timestamp
 
 import common.enums.PostStatus.PostStatus
+import common.utility.TimeUtil
 import controllers.routes
 import play.api.libs.json.{Json, Writes}
 
@@ -33,8 +34,8 @@ object PostDetail {
       "content" -> postDetail.content,
       "authorId" -> postDetail.authorId,
       "authorName" -> postDetail.authorName,
-      "publishTime" -> postDetail.publishTime.toString,
-      "updateTime" -> postDetail.updateTime.toString,
+      "publishTime" -> TimeUtil.formatTimestamp(postDetail.publishTime),
+      "updateTime" -> TimeUtil.formatTimestamp(postDetail.updateTime),
       "status" -> postDetail.status.toString,
       "categoryId" -> postDetail.categoryId,
       "categoryName" -> postDetail.categoryName,

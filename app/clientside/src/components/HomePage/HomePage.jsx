@@ -4,7 +4,7 @@ import { GetHomePagePosts } from '../../services/PostService.js';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { Hero } from './subcomponents/Hero/Hero';
-import { HighlightNav } from './subcomponents/HighlightNav/HighlightNav';
+import { NavGrid } from './subcomponents/NavGrid/NavGrid';
 import { PostList } from './subcomponents/PostList/PostList';
 import { SectionBracket } from './subcomponents/SectionBracket/SectionBracket';
 import 'reset-css/reset.css';
@@ -41,7 +41,7 @@ export default class HomePage extends React.Component {
         		<Header />
                 <Hero {...this.props.hero} />
         		<div className='home-page-body'>    			
-                    <HighlightNav {...this.props.highlightNav} />
+                    <NavGrid navGrid={this.props.navGrid} />
                     <SectionBracket name='最新发布' direction='down' />
                     { this.state.isPostListLoaded && <PostList {...this.state.postList} /> }
         		</div>
@@ -53,6 +53,5 @@ export default class HomePage extends React.Component {
 
 HomePage.propTypes = {
     hero: PropTypes.object.isRequired,
-    highlightNav: PropTypes.object.isRequired,
-    postList: PropTypes.object.isRequired,
+    navGrid: PropTypes.array.isRequired,
 };

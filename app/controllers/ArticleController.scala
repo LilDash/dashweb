@@ -26,9 +26,9 @@ class ArticleController @Inject()(cc: ControllerComponents,
     * a path of `/`.
     */
   def index(id: Long) = Action.async { implicit request: Request[AnyContent] =>
-    postService.getPost(id).map { post =>
-      if (post.isDefined) {
-        val vm = ArticlePageViewModel(PageTypeEnum.Article, LanguageEnum.zh, post.get)
+    postService.getPostDetail(id).map { postDetail =>
+      if (postDetail.isDefined) {
+        val vm = ArticlePageViewModel(PageTypeEnum.Article, LanguageEnum.zh, postDetail.get)
         Ok(views.html.article(vm))
       } else {
         NotFound("Article Not Found")

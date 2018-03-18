@@ -22,6 +22,9 @@ class CenterCroppedImage extends React.PureComponent {
 		return (
 			<div className={[this.props.className, 'center-cropped-image',].join(' ') } >
 				{ image }
+				{ this.props.withShadow ? 
+					<div className={`center-cropped-image-shadow ${this.props.shadowDarker ? "darker" : ""}`} /> : null 
+				}
 			</div>
 		);
 	}
@@ -31,12 +34,16 @@ CenterCroppedImage.propTypes = {
 	className: PropTypes.string,
 	isLazyload: PropTypes.bool,
 	preloadColor: PropTypes.string,
+	withShadow: PropTypes.bool,
+	shadowDarker: PropTypes.bool,
 };
 
 CenterCroppedImage.defaultProps = {
 	className: '',
 	isLazyload: false,
-  	preloadColor: '#000000',
+	preloadColor: '#000000',
+	withShadow: false,
+	shadowDarker: false, 
 };
 
 export { CenterCroppedImage };

@@ -1,4 +1,5 @@
 @import viewModels._
+@import common.utility.TimeUtil
 @(vm: ArticlePageViewModel)
 
 @scripts = {
@@ -12,11 +13,12 @@
     	var articlePageParams = {};
 
     	articlePageParams.articleHero = {
-    		imageSrc: '@routes.Assets.versioned("images/hero.jpg")',
+    		titleImageSrc: "@vm.article.titleImageSrc",
     		preloadColor: '#aaaaaa',
     		title: "@vm.article.title",
-    		category: '旅游',
-    	    publishTime: '@vm.article.publishTime'
+    		categoryName: "@vm.article.categoryName",
+    	    publishTime: "@TimeUtil.formatTimestamp(vm.article.publishTime)",
+    	    authorName: "@vm.article.authorName"
     	};
 
     	articlePageParams.articleBody = {

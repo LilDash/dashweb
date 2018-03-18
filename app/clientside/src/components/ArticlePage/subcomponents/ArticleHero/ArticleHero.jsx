@@ -8,13 +8,14 @@ export class ArticleHero extends React.Component {
 	render() {
 		return (
 			<div className='article-hero'>
-				<LazyloadImage src={this.props.imageSrc} preloadColor={this.props.preloadColor} />
+				<LazyloadImage src={this.props.titleImageSrc} preloadColor={this.props.preloadColor} />
 				<div className='article-hero-overlay' />
 				<div className='article-hero-inner'>
 					<h1 className='article-title'>{this.props.title}</h1>
 					<div className='article-meta'>
-						<span className='article-meta-category'>{this.props.category}</span>
+						<span className='article-meta-category'>{this.props.categoryName}</span>
 						<span className='article-meta-time'>{this.props.publishTime}</span>
+						<span className='article-meta-author'>{this.props.authorName}</span>
 					</div>
 				</div>
 				
@@ -24,11 +25,12 @@ export class ArticleHero extends React.Component {
 }
 
 ArticleHero.propTypes = {
-	imageSrc: PropTypes.string.isRequired,
+	titleImageSrc: PropTypes.string.isRequired,
 	preloadColor: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
-	category: PropTypes.string.isRequired,
+	categoryName: PropTypes.string.isRequired,
 	publishTime: PropTypes.string.isRequired,
+	authorName: PropTypes.string.isRequired,
 };
 
 ArticleHero.defaultProps = {

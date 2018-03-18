@@ -58,18 +58,22 @@ $hero-height-mobile: 350px;
 			    color: $grey0;
 			}
 
-			&-time{
+			&-time, &-author{
 				margin-left: 30px;
 			}
 		}
 
 		@media (max-width: $main-width-default) {
 			width: $main-width-mobile;
-			height: $hero-height-mobile/2;
-			transform: translateY(-$hero-height-mobile/2);
+			height: 155px;
+			transform: translateY(-155px);
 			
 			h1 {
 				font-size: 24px;
+			}
+
+			.article-meta {
+				bottom: 20px;
 			}
 		}
 	}

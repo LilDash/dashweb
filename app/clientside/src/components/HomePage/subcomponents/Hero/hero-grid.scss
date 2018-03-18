@@ -1,0 +1,26 @@
+@import '../../../../styles/variables.scss';
+
+.hero-grid {
+    transform: translateY(-400px);
+    width: 1000px;
+    margin: 0 auto;
+
+    &-l {
+        display: inline-block;
+    }
+
+    &-r {
+        display: inline-block;
+        position: absolute;
+        right:10px;
+    }
+
+    &-city-name {
+        text-align: center;
+        font-size: 26px;
+        color: $white;
+        margin: 30px 0 0 0;
+        border: solid 4px $white;
+        padding: 10px;
+    }
+}

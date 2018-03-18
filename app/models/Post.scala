@@ -3,6 +3,7 @@ package models
 import java.sql.Timestamp
 
 import common.enums.PostStatus.PostStatus
+import common.utility.TimeUtil
 import controllers.routes
 import play.api.libs.json.{Json, Writes}
 
@@ -24,8 +25,8 @@ object Post {
       "id" -> post.id,
       "title" -> post.title,
       "content" -> post.content,
-      "publishTime" -> post.publishTime.toString,
-      "updateTime" -> post.updateTime.toString,
+      "publishTime" -> TimeUtil.formatTimestamp(post.publishTime),
+      "updateTime" -> TimeUtil.formatTimestamp(post.updateTime),
       "tags" -> Json.arr("旅游", "俄罗斯"),
       "comments" -> 2,
       "category" -> "旅游",
