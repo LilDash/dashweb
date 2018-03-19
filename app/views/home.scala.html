@@ -1,4 +1,5 @@
 @import viewModels._
+@import play.api.libs.json.{Json}
 @(vm: HomePageViewModel)
 
 @scripts = {
@@ -14,6 +15,20 @@
     	homePageParams.hero = {
     		imageSrc: '@routes.Assets.versioned("images/hero3.jpg")',
     		preloadColor: '#666666',
+    		heroGrid: {
+                headlinePosts: @{
+                    var arr = Json.arr()
+                    for(post <- vm.headlinePosts) {
+                        arr = arr.append(Json.obj(
+                            "id" -> post.id,
+                            "title" -> post.title,
+                            "titleImageSrc" -> post.titleImageSrc
+                        ))
+
+                    }
+                    Html(Json.toJson(arr).toString)
+                }
+    		}
     	};
 
     	homePageParams.navGrid = [
@@ -24,7 +39,7 @@
                     title: '- 最新 -',
                     description: '',
                     href: '/',
-                    imagePreloadColor: '#6699CC',
+                    imagePreloadColor: '#009966', //'#6699CC',
                     size: 1,
     	        },
     	        {
@@ -33,7 +48,7 @@
                     title: '- 博客 -',
                     description: '',
                     href: '/',
-                    imagePreloadColor: '#FFCC66',
+                    imagePreloadColor: '#009966', //'#FFCC66',
                     size: 1,
                     withShadow: true,
     	        },
@@ -43,7 +58,7 @@
                     title: '- 旅游 -',
                     description: '我们的游记。一边环游全球，一边分享世界每个角落。',
                     href: '/',
-                    imagePreloadColor: '#9999CC',
+                    imagePreloadColor: '#009966', //'#9999CC',
                     size: 2,
     		    },
     	    ],
@@ -54,7 +69,7 @@
                     title: '- 精选旅游线路 -',
                     description: '',
                     href: '/',
-                    imagePreloadColor: '#CCCCCC',
+                    imagePreloadColor: '#009966', //'#CCCCCC',
                     size: 2,
                     withShadow: true,
     		    },
@@ -64,7 +79,7 @@
                     title: '- 每日推荐 -',
                     description: '',
                     href: '/',
-                    imagePreloadColor: '#FFCC66',
+                    imagePreloadColor: '#009966', //'#FFCC66',
                     size: 1,
     	        },
     	        {
@@ -73,7 +88,7 @@
                     title: '- 旅淘 -',
                     description: '全球买手为你推荐世界各地必买好货。',
                     href: '/',
-                    imagePreloadColor: '#0099CC',
+                    imagePreloadColor: '#009966', //'#0099CC',
                     size: 1,
                     withShadow: true,
     	        },

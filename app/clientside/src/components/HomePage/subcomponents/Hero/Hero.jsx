@@ -10,7 +10,7 @@ export class Hero extends React.Component {
 		return (
 			<div className='hero'>
 				<LazyloadImage className='hero-background' src={this.props.imageSrc} preloadColor={this.props.preloadColor} />
-				<HeroGrid />
+				<HeroGrid {...this.props.heroGrid} />
 			</div>
 		);
   	}
@@ -19,6 +19,7 @@ export class Hero extends React.Component {
 Hero.propTypes = {
 	imageSrc: PropTypes.string.isRequired,
 	preloadColor: PropTypes.string.isRequired,
+	heroGrid: PropTypes.object.isRequired,
 };
 
 Hero.defaultProps = {

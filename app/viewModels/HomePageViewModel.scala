@@ -2,6 +2,7 @@ package viewModels
 
 import common.enums.LanguageEnum.LanguageEnum
 import common.enums.PageTypeEnum.PageTypeEnum
+import models.PostDetail
 
-case class HomePageViewModel(val pageType: PageTypeEnum, val language: LanguageEnum)
+case class HomePageViewModel(pageType: PageTypeEnum, language: LanguageEnum, headlinePosts: Seq[PostDetail])
   extends BaseViewModel
