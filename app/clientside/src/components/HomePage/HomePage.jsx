@@ -7,6 +7,7 @@ import { Hero } from './subcomponents/Hero/Hero';
 import { NavGrid } from './subcomponents/NavGrid/NavGrid';
 import { PostList } from './subcomponents/PostList/PostList';
 import { SectionBracket } from './subcomponents/SectionBracket/SectionBracket';
+import { Loading } from '../common/Loading/Loading';
 import 'reset-css/reset.css';
 import '../../styles/default.scss';
 import './home-page.scss';
@@ -44,6 +45,7 @@ export default class HomePage extends React.Component {
                     <NavGrid navGrid={this.props.navGrid} />
                     <SectionBracket name='最新发布' direction='down' />
                     { this.state.isPostListLoaded && <PostList {...this.state.postList} /> }
+                    <Loading />
         		</div>
         		<Footer />
         	</div>

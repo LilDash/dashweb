@@ -12,13 +12,13 @@ export class HeroGrid extends React.Component {
             dateDay: '',
             dateMonth: '',
             dateDate: '',
-        };
-        
-        
+            zoomIn: [false, false, false],
+        };      
     }
 
     componentWillMount() {
         this.makeDate();
+        this.renderHeroGridCell = this.renderHeroGridCell.bind(this);
     }
     
     makeDate() {
@@ -67,19 +67,34 @@ export class HeroGrid extends React.Component {
         } 
     }
 
-    renderHeroGridCell(post) {
+    renderHeroGridCell(index) {
+        const post = this.props.headlinePosts[index];
+        
         return (
-            <a className='hero-grid-cell' href={`/a/${post.id}`}>
+            <a 
+                className='hero-grid-cell' 
+                href={`/a/${post.id}`} 
+                onMouseEnter={ () => {
+                    const z = this.state.zoomIn;
+                    z[index] = true;
+                    this.setState({zoomIn: z});
+                } }
+                onMouseLeave={ () => {
+                    const z = this.state.zoomIn;
+                    z[index] = false;
+                    this.setState({zoomIn: z});
+                } }
+            >
                 <CenterCroppedImage 
                     className='hero-grid-cell-img' 
                     src={ post.titleImageSrc }
                     isLazyload={ true }
                     preloadColor='#009966'
+                    zoomIn={ this.state.zoomIn[index] }
                 />
                 <span className='hero-grid-cell-title'>{ post.title }</span>
             </a>
-        )
-        
+        )      
     }
 
 	render() {
@@ -99,14 +114,14 @@ export class HeroGrid extends React.Component {
                         </div>
                     </div> */}
                     <div className='col-l'>
-                        {this.renderHeroGridCell(this.props.headlinePosts[0])}
+                        {this.renderHeroGridCell(0)}
                     </div>
                     <div className='col-r'>
                         <div className='row'>
-                            {this.renderHeroGridCell(this.props.headlinePosts[1])}
+                            {this.renderHeroGridCell(1)}
                         </div>
                         <div className='row'>
-                            {this.renderHeroGridCell(this.props.headlinePosts[2])}
+                            {this.renderHeroGridCell(2)}
                         </div>
                     </div>
                 </div>

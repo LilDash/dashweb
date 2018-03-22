@@ -20,13 +20,18 @@ class LazyloadImage extends React.PureComponent {
 
 	render() {
 
-		var backgroundStyle = {
+		const backgroundStyle = {
 			backgroundColor: this.props.preloadColor,
 		};
 
-		var imageStype = {
+		const imageClassName = 'lazyload-image-foreground ' + 
+			(this.state.isImageDisplayed ? 'show ' : '') + 
+			(this.props.zoomIn ? 'zoom-in' : '');
+
+		const imageStyle = {
 			backgroundImage: 'url(' + this.props.src + ')',
 		};
+
 
 		return (
 			<div className={ ['lazyload-image', this.props.className].join(' ')} style={ backgroundStyle }>
@@ -35,11 +40,8 @@ class LazyloadImage extends React.PureComponent {
 					src={ this.props.src }
 					onLoad={ this.handleImageOnLoad }
 				/>
-				<div 
-					className={ 
-						this.state.isImageDisplayed ? 'lazyload-image-foreground show' : 'lazyload-image-foreground'
-					} 
-					style={ imageStype } 
+				<div className={ imageClassName } 
+					style={ imageStyle } 
 				/>
 			</div>
 		);
@@ -49,12 +51,14 @@ class LazyloadImage extends React.PureComponent {
 LazyloadImage.propTypes = {
 	className: PropTypes.string,
   	src: PropTypes.string.isRequired,
-  	preloadColor: PropTypes.string,
+	preloadColor: PropTypes.string,
+	zoomIn: PropTypes.bool,  
 };
 
 LazyloadImage.defaultProps = {
 	className: '',
-  	preloadColor: '#000000',
+	preloadColor: '#000000',
+	zoomIn: false,
 };
 
 export { LazyloadImage };

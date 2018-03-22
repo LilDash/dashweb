@@ -14,17 +14,22 @@
         height: 100%;
         opacity: 0;
         filter: alpha(opacity=0);
-        transition: opacity 2s linear;
-        -webkit-transition: opacity 2s linear;
-        -moz-transition: opacity 2s linear;
-        -ms-transition: opacity 2s linear;
-        background-repeat: none;
+        transition: opacity 0.4s linear;
+        -webkit-transition: opacity 0.4s linear;
+        -moz-transition: opacity 0.4s linear;
+        -ms-transition: opacity 0.4s linear;
+        background-repeat: no-repeat;
         background-position: center;
-        background-size: cover;
+		background-size: cover;
+		transition: all 0.8s;
 	}
 
 	&-foreground.show {
 		opacity: 1;
         filter: alpha(opacity=100);
+	}
+
+	.zoom-in {
+		transform: scale(1.05);
 	}
 }

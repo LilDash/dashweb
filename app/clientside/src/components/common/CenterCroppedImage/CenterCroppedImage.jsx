@@ -18,7 +18,6 @@ class CenterCroppedImage extends React.PureComponent {
 			image = <img {...this.props} />;
 		}
 
-
 		return (
 			<div className={[this.props.className, 'center-cropped-image',].join(' ') } >
 				{ image }
@@ -36,6 +35,7 @@ CenterCroppedImage.propTypes = {
 	preloadColor: PropTypes.string,
 	withShadow: PropTypes.bool,
 	shadowDarker: PropTypes.bool,
+	zoomIn: PropTypes.bool,
 };
 
 CenterCroppedImage.defaultProps = {
@@ -44,6 +44,7 @@ CenterCroppedImage.defaultProps = {
 	preloadColor: '#000000',
 	withShadow: false,
 	shadowDarker: false, 
+	zoomIn: false,
 };
 
 export { CenterCroppedImage };
