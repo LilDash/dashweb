@@ -41,7 +41,7 @@ CenterCroppedImage.propTypes = {
 CenterCroppedImage.defaultProps = {
 	className: '',
 	isLazyload: false,
-	preloadColor: '#000000',
+	preloadColor: 'rgba(0,0,0,0)',
 	withShadow: false,
 	shadowDarker: false, 
 	zoomIn: false,

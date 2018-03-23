@@ -1,6 +1,11 @@
 @import '../../../../styles/variables.scss';
 
 .hero-grid {
+
+    @media (max-width: $main-width-default) {
+        display: none;
+    }
+
     transform: translateY(-400px);
     width: 1000px;
     margin: 0 auto;

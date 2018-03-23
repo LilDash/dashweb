@@ -6,16 +6,16 @@
 	z-index: 10;
 	text-align: center;
 
+	@media (max-width: $main-width-default) {
+		margin-bottom: 50px;
+	}
+
 	&-cell {
 		display: inline-block;
 		height: 160px;
 		margin: 10px;
 		overflow: hidden;
 		vertical-align: middle;
-
-		@media (max-width: $main-width-default) {
-		    width: 80%;
-		}
 
 		&-img {
 			width: 100%;
@@ -54,6 +54,39 @@
 		&-2 {
 			width: 48%;
 		}
+
+		
+		@media (max-width: $main-width-default) {
+			margin: 5px;
+			height: 80px;
+			
+			&-img {
+				height: 80px;
+			}
+
+			&-text {
+				height: 40px;
+				transform: translateY(-42px);
+			}
+	
+			&-title {
+				font-size: 14px;
+				color: $white;
+			}
+	
+			&-desc {
+				display: none;
+			}
+
+			&-1 {
+				width: 22%;
+			}
+	
+			&-2 {
+				width: 45%;
+			}
+		}
+
 	}
 
 	&-cell:hover {

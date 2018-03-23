@@ -9,7 +9,12 @@ export class Hero extends React.Component {
 	render() {
 		return (
 			<div className='hero'>
-				<LazyloadImage className='hero-background' src={this.props.imageSrc} preloadColor={this.props.preloadColor} />
+				<LazyloadImage 
+					className='hero-background' 
+					src={this.props.imageSrc} 
+					displayLoading={false} 
+					preloadColor={this.props.preloadColor} 
+				/>
 				<HeroGrid {...this.props.heroGrid} />
 			</div>
 		);

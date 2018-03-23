@@ -89,7 +89,6 @@ export class HeroGrid extends React.Component {
                     className='hero-grid-cell-img' 
                     src={ post.titleImageSrc }
                     isLazyload={ true }
-                    preloadColor='#009966'
                     zoomIn={ this.state.zoomIn[index] }
                 />
                 <span className='hero-grid-cell-title'>{ post.title }</span>

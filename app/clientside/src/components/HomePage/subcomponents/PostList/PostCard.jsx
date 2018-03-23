@@ -25,7 +25,6 @@ class PostCard extends React.PureComponent {
 						className='post-card-img' 
 						src={ this.props.titleImageSrc }
 						isLazyload={ true }
-						preloadColor='#009966'
 					/>
 					<span className='post-card-category'>{ this.props.categoryName }</span>
 				</div>

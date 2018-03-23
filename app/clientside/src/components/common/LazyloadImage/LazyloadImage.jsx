@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import './lazyload-image.scss';
+import { Loading } from '../Loading/Loading';
 
 
 class LazyloadImage extends React.PureComponent {
@@ -35,6 +36,7 @@ class LazyloadImage extends React.PureComponent {
 
 		return (
 			<div className={ ['lazyload-image', this.props.className].join(' ')} style={ backgroundStyle }>
+				{ this.props.displayLoading && !this.state.isImageDisplayed ? <Loading /> : null }
 				<img 
 					className='lazyload-image-preloader'
 					src={ this.props.src }
@@ -53,12 +55,14 @@ LazyloadImage.propTypes = {
   	src: PropTypes.string.isRequired,
 	preloadColor: PropTypes.string,
 	zoomIn: PropTypes.bool,  
+	displayLoading: PropTypes.bool,
 };
 
 LazyloadImage.defaultProps = {
 	className: '',
-	preloadColor: '#000000',
+	preloadColor: 'rgba(0,0,0,0)',
 	zoomIn: false,
+	displayLoading: true,
 };
 
 export { LazyloadImage };

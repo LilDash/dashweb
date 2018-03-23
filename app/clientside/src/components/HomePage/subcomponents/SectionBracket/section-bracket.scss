@@ -10,7 +10,8 @@
 	text-align: center;
 
 	@media (max-width: $main-width-default) {
-	    width: 90%;
+		width: 90%;
+		margin: 20px auto;
 	}
 
 	&.up {

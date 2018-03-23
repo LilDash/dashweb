@@ -6,6 +6,7 @@
 	margin: 50px auto;
 
 	@media (max-width: $main-width-default) {
-	    width: $main-width-mobile;
+		width: $main-width-mobile;
+		margin-top: 30px;
 	}
 }

@@ -43,6 +43,7 @@ class NavGridCell extends React.PureComponent {
 					preloadColor={ this.props.imagePreloadColor }
 					withShadow={ this.props.withShadow }
 					shadowDarker={ this.state.isHover }
+					displayLoading={ this.props.displayLoading }
 				/>
 				<div className='nav-grid-cell-text'>
 					<span className='nav-grid-cell-title'>{ this.props.title }</span>
@@ -63,11 +64,13 @@ NavGridCell.propTypes = {
 	imagePreloadColor: PropTypes.string,
 	size: PropTypes.number.isRequired,
 	withShadow: PropTypes.bool,
+	displayLoading: PropTypes.bool,
 };
 
 NavGridCell.defaultProps = {
 	href: '',
 	withShadow: false,
+	displayLoading: true,
 };
 
 export { NavGridCell };
