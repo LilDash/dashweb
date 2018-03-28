@@ -31,14 +31,17 @@
     		}
     	};
 
+        homePageParams.defaultCategoryId = 6;
+        homePageParams.defaultCategoryTitle = '- 最新发布 -';
+
     	homePageParams.navGrid = [
     	    [
     	        {
     	            name: 'new',
     	            imageSrc: '',
-                    title: '- 最新 -',
+                    title: '- 最新发布 -',
                     description: '',
-                    href: '/',
+                    categoryId: 6,
                     imagePreloadColor: '#009966', //'#6699CC',
                     size: 1,
                     displayLoading: false,
@@ -48,7 +51,7 @@
     	            imageSrc: '@routes.Assets.versioned("images/nav_blog.jpg")',
                     title: '- 博客 -',
                     description: '',
-                    href: '/',
+                    categoryId: 2,
                     //imagePreloadColor: '#009966', //'#FFCC66',
                     size: 1,
                     withShadow: true,
@@ -58,7 +61,7 @@
                     imageSrc: '',
                     title: '- 旅游 -',
                     description: '我们的游记。一边环游全球，一边分享世界每个角落。',
-                    href: '/',
+                    categoryId: 1,
                     imagePreloadColor: '#009966', //'#9999CC',
                     size: 2,
                     displayLoading: false,
@@ -70,7 +73,7 @@
                     imageSrc: '@routes.Assets.versioned("images/nav_travel.jpg")',
                     title: '- 精选旅游线路 -',
                     description: '',
-                    href: '/',
+                    categoryId: 4,
                     //imagePreloadColor: '#009966', //'#CCCCCC',
                     size: 2,
                     withShadow: true,
@@ -80,7 +83,7 @@
     	            imageSrc: '',
                     title: '- 每日推荐 -',
                     description: '',
-                    href: '/',
+                    categoryId: 5,
                     imagePreloadColor: '#009966', //'#FFCC66',
                     size: 1,
                     displayLoading: false,
@@ -90,7 +93,7 @@
     	            imageSrc: '@routes.Assets.versioned("images/nav_shopping.jpg")',
                     title: '- 旅淘 -',
                     description: '全球买手为你推荐世界各地必买好货。',
-                    href: '/',
+                    categoryId: 3,
                     //imagePreloadColor: '#009966', //'#0099CC',
                     size: 1,
                     withShadow: true,

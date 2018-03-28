@@ -11,19 +11,22 @@ class CategoryTableDef(tag: Tag) extends Table[Category](tag, "category"){
   def name = column[String]("name")
   def createTime = column[Timestamp]("create_time")
   def status = column[Int]("status")
+  def description = column[Option[String]]("description")
 
   override def * =
     (
       id,
       name,
       createTime,
-      status
+      status,
+      description
     ) <> (
       {
-        case (id, name, createTime, status) => Category(id, name, createTime, CategoryStatus(status))
+        case (id, name, createTime, status, description) =>
+          Category(id, name, createTime, CategoryStatus(status), description)
       },
       {
-        c: Category => Some((c.id, c.name, c.createTime, c.status.id))
+        c: Category => Some((c.id, c.name, c.createTime, c.status.id, c.description))
       }
     )
 }

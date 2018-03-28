@@ -17,10 +17,18 @@ class NavGrid extends React.Component {
 
 
 
-	navGridRow(cells) {
+	navGridRow(cells, index) {
 		return (
-			<div className='nav-grid-row'>
-				{ cells.map((y, j)=> <NavGridCell {...y} />) }
+			<div className='nav-grid-row' key={`nav-grid-row-${index}`}>
+				{ 
+					cells.map((y, j) =>
+						<NavGridCell 
+							key={`nav-grid-cell-${y.name}`} 
+							{...y} 
+							onCellClick={this.props.onCellClick} 
+						/>
+					) 
+				}
 			</div>
 		);
 	}
@@ -32,7 +40,7 @@ class NavGrid extends React.Component {
 			<div className='nav-grid' >
 				{ 
 					this.props.navGrid.map((x, i) => 
-						this.navGridRow(x)
+						this.navGridRow(x, i)
 					)
 				}
 			</div>
@@ -41,7 +49,8 @@ class NavGrid extends React.Component {
 };
 
 NavGrid.propTypes = {
-  	navGrid: PropTypes.array.isRequired,
+	navGrid: PropTypes.array.isRequired,
+	onCellClick: PropTypes.func.isRequired,  
 };
 
 NavGrid.defaultProps = {

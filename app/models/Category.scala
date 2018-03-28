@@ -11,7 +11,8 @@ case class Category (
                       id: Long,
                       name: String,
                       createTime: Timestamp,
-                      status: CategoryStatus
+                      status: CategoryStatus,
+                      description: Option[String],
                     )
 
 object Category {
@@ -20,7 +21,8 @@ object Category {
       "id" -> category.id,
       "name" -> category.name,
       "createTime" -> category.createTime.toString,
-      "status" -> category.status.id
+      "status" -> category.status.id,
+      "description" -> category.description,
     )
   }
 }

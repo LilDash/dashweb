@@ -66,6 +66,14 @@ class PostService @Inject()(
     }
   }
 
+  def getPostsByCategory(categoryId: Long, page: Int, numPerPage: Int): Future[Seq[PostDetail]] = {
+    val offset = page * numPerPage
+    PostRepository.getByCategoryId(categoryId, offset, numPerPage).flatMap { posts: Seq[Post] =>
+      val future = posts.map(p => getPostDetail(p))
+      Future.sequence((future))
+    }
+  }
+
   def populatePostDetail(postBase: Post,
                          titleImage: Option[Image],
                          category: Option[Category]): PostDetail = {

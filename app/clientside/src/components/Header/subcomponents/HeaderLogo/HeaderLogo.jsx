@@ -8,6 +8,7 @@ export class HeaderLogo extends React.PureComponent {
 		return (
 			<a className='header-logo' href='/'>
 				<span>D-Planet</span>
+				<span>呆星</span>
 			</a>
 		);
   	}

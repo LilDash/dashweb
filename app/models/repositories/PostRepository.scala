@@ -47,4 +47,11 @@ object PostRepository {
     ).sortBy(_.id.desc).take(n).result
     dbConfig.db.run(action)
   }
+
+  def getByCategoryId(categoryId: Long, offset: Long, count: Int): Future[Seq[Post]] = {
+    val action = posts.filter(p =>
+      p.status === PostStatus.active.id && p.categoryId === categoryId
+    ).sortBy(_.id.desc).drop(offset).take(count).result
+    dbConfig.db.run(action)
+  }
 }

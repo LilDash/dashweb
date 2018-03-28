@@ -1,7 +1,7 @@
 import { Ajax } from './utility/Ajax.js';
 
-export function GetHomePagePosts(callback){
-	Ajax.get('/api/homePagePosts', {}, function(response){
+export function GetHomePagePosts(categoryId, callback){
+	Ajax.get('/api/homePagePosts?cid='+categoryId, {}, function(response){
 		callback(response.data);
 	});
 };

@@ -27,14 +27,19 @@ class NavGridCell extends React.PureComponent {
 		})
 	}
 
+	handleOnClick(){
+		this.props.onCellClick(this.props.categoryId, this.props.title);
+	}
+
 	render() {
-		
+		const isActiveClass = this.props.isActive ? 'active' : '' ;
 		return (
 			<div 
-				className={`nav-grid-cell nav-grid-cell-${ this.props.size } nav-grid-cell-${ this.props.name }`} 
-				data-href={ this.props.href }
+				className=
+					{`nav-grid-cell nav-grid-cell-${ this.props.size } nav-grid-cell-${ this.props.name } ${isActiveClass}`}
 				onMouseEnter={ this.handleMouseEnter.bind(this) }
 				onMouseLeave={ this.handleMouseLeave.bind(this) }
+				onClick={ this.handleOnClick.bind(this) }
 			>
 				<CenterCroppedImage 
 					className='nav-grid-cell-img' 
@@ -49,7 +54,6 @@ class NavGridCell extends React.PureComponent {
 					<span className='nav-grid-cell-title'>{ this.props.title }</span>
 					<p className='nav-grid-cell-desc'>{ this.props.description }</p>
 				</div>
-
 			</div>
 		);
 	}
@@ -60,17 +64,19 @@ NavGridCell.propTypes = {
   	imageSrc: PropTypes.string.isRequired,
   	title: PropTypes.string.isRequired,
   	description: PropTypes.string.isRequired,
-  	href: PropTypes.string,
+  	categoryId: PropTypes.number.isRequired,
 	imagePreloadColor: PropTypes.string,
 	size: PropTypes.number.isRequired,
 	withShadow: PropTypes.bool,
 	displayLoading: PropTypes.bool,
+	onCellClick: PropTypes.func.isRequired,
+	isActive: PropTypes.bool,
 };
 
 NavGridCell.defaultProps = {
-	href: '',
 	withShadow: false,
 	displayLoading: true,
+	isActive: false,
 };
 
 export { NavGridCell };

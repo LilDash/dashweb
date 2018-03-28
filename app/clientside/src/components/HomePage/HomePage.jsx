@@ -5,6 +5,7 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { Hero } from './subcomponents/Hero/Hero';
 import { NavGrid } from './subcomponents/NavGrid/NavGrid';
+import { PostListContainer } from './subcomponents/PostListContainer/PostListContainer';
 import { PostList } from './subcomponents/PostList/PostList';
 import { SectionBracket } from './subcomponents/SectionBracket/SectionBracket';
 import { Loading } from '../common/Loading/Loading';
@@ -22,18 +23,24 @@ export default class HomePage extends React.Component {
         this.state = {
             isPostListLoaded: false,
             postList: [],
+            curCategory: this.props.defaultCategoryTitle,
         };
     }
 
     componentDidMount() {
-        GetHomePagePosts(this.renderPostList);
+        GetHomePagePosts(this.props.defaultCategoryId, this.renderPostList);
     }
 
     renderPostList(data) {
         this.setState({
             isPostListLoaded: true,
             postList: data,
-        });  
+        });
+    }
+
+    handleOnNavCellClick(categoryId, categoryTitle) {
+        this.setState({ isPostListLoaded: false, curCategory: categoryTitle });
+        GetHomePagePosts(categoryId, this.renderPostList);    
     }
 
     render() {
@@ -42,18 +49,19 @@ export default class HomePage extends React.Component {
         		<Header />
                 <Hero {...this.props.hero} />
         		<div className='home-page-body'>    			
-                    <NavGrid navGrid={this.props.navGrid} />
-                    <SectionBracket name='最新发布' direction='down' />
-                    { this.state.isPostListLoaded && <PostList {...this.state.postList} /> }
-                    <Loading />
+                    <NavGrid navGrid={this.props.navGrid} onCellClick={this.handleOnNavCellClick.bind(this)} />
+                    { !this.state.isPostListLoaded && <div className='loading-wrap'><Loading /></div> }
+                    { this.state.isPostListLoaded && <PostListContainer {...this.state.postList} category={this.state.curCategory} /> }
         		</div>
         		<Footer />
         	</div>
         );
-     }
+    }
 };
 
 HomePage.propTypes = {
     hero: PropTypes.object.isRequired,
     navGrid: PropTypes.array.isRequired,
+    defaultCategoryId: PropTypes.number.isRequired,
+    defaultCategoryTitle: PropTypes.string.isRequired,
 };

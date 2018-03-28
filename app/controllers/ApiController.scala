@@ -2,10 +2,14 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 
-import play.api.libs.json.{Json}
+import common.enums.PredefinedCategoryId
+import models.PostDetail
+import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Request}
 import services.PostService
+
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 @Singleton
 class ApiController @Inject()(cc: ControllerComponents,
@@ -20,12 +24,17 @@ class ApiController @Inject()(cc: ControllerComponents,
     * a path of `/`.
     */
   def homePagePosts() = Action.async { implicit request: Request[AnyContent] =>
-
-    postService.getNLatestPosts(10).map { posts =>
+    val categoryId = request.getQueryString("cid").getOrElse("0").toInt
+    val postsToJson = (posts: Seq[PostDetail]) => {
       val data = Json.obj(
         "posts" -> posts
       )
       Ok(Json.toJson(data))
+    }
+    categoryId match {
+      case 6 => postService.getNLatestPosts(10).map(postsToJson)
+      case 5 => postService.getNLatestPosts(10).map(postsToJson)
+      case categoryId: Int => postService.getPostsByCategory(categoryId, 0, 10).map(postsToJson)
     }
   }
 
