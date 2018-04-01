@@ -6,6 +6,7 @@
 	box-shadow: 0px 2px 5px 0px #666666;
 	z-index: 1;
 	position: relative;
+	margin-top: 65px;
 
 	@media (max-width: $main-width-default) {
 		height: 200px;

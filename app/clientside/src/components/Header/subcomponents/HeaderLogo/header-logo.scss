@@ -1,7 +1,41 @@
+@import '../../../../styles/variables.scss';
+
 .header-logo {
-	display: inline-block;
+	display: block;
 	padding: 15px 20px;
-	color: #eeeeee;
-	font-size: 24px;
-	text-shadow: black 0.1em 0.1em 0.2em;
+	color: $white;
+	
+	&-img {
+		background-image: url('/assets/images/0planet_logo_1.png');
+		background-repeat: no-repeat;
+		background-size: 100%;
+		display: inline-block;
+		position: absolute;
+		width: 100px;
+		height: 100px;
+		z-index: 999;
+	}
+
+	&-label-large {
+		margin-left: 120px;
+		display: block;
+		font-size: 24px;
+		margin-top: 16px;
+		z-index: 999;
+		position: absolute;
+		text-shadow: $theme-green 0.1em 0.1em 0.2em;
+	}
+
+	&-label-small {
+		display: block;
+		margin-left: 120px;
+		z-index: 999;
+		margin-top: 10px;
+		position: absolute;
+		top: 62px;
+		font-size: 16px;
+		font-family: fantasy;
+		text-shadow: black 0.1em 0.1em 0.2em;
+	}
+	
 }

@@ -6,9 +6,10 @@ import PropTypes from 'prop-types';
 export class HeaderLogo extends React.PureComponent {
 	render() {
 		return (
-			<a className='header-logo' href='/'>
-				<span>D-Planet</span>
-				<span>呆星</span>
+			<a className='header-logo' href='/' >
+				<span className='header-logo-img' />
+				<span className='header-logo-label-large'>{ '零号星球'}</span>
+				<span className='header-logo-label-small'>{ '0-Planet'}</span>
 			</a>
 		);
   	}

@@ -37,6 +37,25 @@ var config = {
         exclude: /node_modules/,
         loader: 'eslint-loader'
       },
+      // {
+      //   test: /\.(jpg|png)$/,
+      //   loader: 'url-loader?limit=100000'
+      // },
+      // {
+      //   test: /\.jpe?g$|\.gif$|\.png$/i,
+      //   loader: "file-loader?name=/img/[name].[ext]"
+
+      // },
+      {
+        test: /\.(png|jp(e*)g|svg)$/,  
+        use: [{
+            loader: 'url-loader',
+            options: { 
+                limit: 8000, // Convert images < 8kb to base64 strings
+                name: '/assets/images/[name].[ext]'
+            } 
+        }]
+      }
     ]
   },
 
