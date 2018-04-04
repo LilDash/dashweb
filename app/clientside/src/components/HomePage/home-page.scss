@@ -12,11 +12,28 @@
 		    width: $main-width-mobile;
 		}
 
+		.loading-container {
+			text-align: center;
+		}
+
 		.loading-wrap {
 			position: absolute;
 			display: block;
 			width: 100%;
 			height: 200px;
+		}
+
+		.load-more {
+			display: inline-block;
+			color: $white;
+			background-color: $theme-green;
+			padding: 12px 30px;
+			border-radius: 4px;
+			margin: 100px 0px;
+		}
+
+		.load-more.disable {
+			background-color: $grey2;
 		}
 	}
 }

@@ -48,6 +48,13 @@ object PostRepository {
     dbConfig.db.run(action)
   }
 
+  def getAllActive(offset: Long, count: Int): Future[Seq[Post]] = {
+    val action = posts.filter(p =>
+      p.status === PostStatus.active.id
+    ).sortBy(_.id.desc).drop(offset).take(count).result
+    dbConfig.db.run(action)
+  }
+
   def getByCategoryId(categoryId: Long, offset: Long, count: Int): Future[Seq[Post]] = {
     val action = posts.filter(p =>
       p.status === PostStatus.active.id && p.categoryId === categoryId

@@ -18,40 +18,80 @@ export default class HomePage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.renderPostList = this.renderPostList.bind(this);
+        this.updatePostList = this.updatePostList.bind(this);
 
         this.state = {
-            isPostListLoaded: false,
+            isPostListLoading: true,
             postList: [],
-            curCategory: this.props.defaultCategoryTitle,
+            curCategoryId: this.props.defaultCategoryId,
+            curCategoryTitle: this.props.defaultCategoryTitle,
+            curPage: 0,
+            noMorePost: false,
         };
     }
 
     componentDidMount() {
-        GetHomePagePosts(this.props.defaultCategoryId, this.renderPostList);
+        GetHomePagePosts(this.props.defaultCategoryId, this.state.curPage, this.updatePostList);
     }
 
-    renderPostList(data) {
+    updatePostList(data) {
+        if (data && data.posts && data.posts.length > 0){
+            const newPostlist = this.state.postList.concat(data.posts);
+            this.setState({
+                isPostListLoading: false,
+                postList: newPostlist,
+            });
+        } else {
+            this.setState({
+                isPostListLoading: false,
+                noMorePost: true,
+            });
+        }
+    }
+
+    handleNavCellOnClick(categoryId, categoryTitle) {
+        if (this.state.curCategoryId !== categoryId) {
+            this.setState({ 
+                isPostListLoading: true, 
+                curCategoryId: categoryId,
+                curCategoryTitle: categoryTitle,
+                curPage: 0, 
+                postList: [],
+                noMorePost: false,
+            });
+            GetHomePagePosts(categoryId, 0, this.updatePostList);  
+        }  
+    }
+    
+    handleLoadMoreOnClick() {
+        const newPage = this.state.curPage + 1;
         this.setState({
-            isPostListLoaded: true,
-            postList: data,
+            isPostListLoading: true,
+            curPage: newPage,
         });
+        GetHomePagePosts(this.state.curCategoryId, newPage, this.updatePostList);
     }
 
-    handleOnNavCellClick(categoryId, categoryTitle) {
-        this.setState({ isPostListLoaded: false, curCategory: categoryTitle });
-        GetHomePagePosts(categoryId, this.renderPostList);    
+    renderLoadMoreButton() {
+        if (this.state.noMorePost) {
+            return <a className='load-more disable' >{'到底了！'}</a>;
+        } else {
+            return <a className='load-more' onClick={this.handleLoadMoreOnClick.bind(this)}>{'点击加载更多'}</a>;
+        }
     }
 
     render() {
+
+        const loadMore = this.renderLoadMoreButton();
+        const loading = <div className='loading-wrap'><Loading /></div>;
         return (
         	<div className='home-page'>
         		<Header />
                 <Hero {...this.props.hero} />
         		<div className='home-page-body'>    			
-                    <NavGrid navGrid={this.props.navGrid} onCellClick={this.handleOnNavCellClick.bind(this)} />
-                    { !this.state.isPostListLoaded && <div className='loading-wrap'><Loading /></div> }
-                    { this.state.isPostListLoaded && <PostListContainer {...this.state.postList} category={this.state.curCategory} /> }
+                    <NavGrid navGrid={this.props.navGrid} onCellClick={this.handleNavCellOnClick.bind(this)} />
+                    <PostListContainer posts={this.state.postList} category={this.state.curCategoryTitle} />
+                    <div className={'loading-container'}>{ this.state.isPostListLoading ? loading : loadMore }</div>
         		</div>
         		<Footer />
         	</div>
