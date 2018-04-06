@@ -11,31 +11,29 @@ class NavGrid extends React.Component {
 	    super(props);
 	    //this.imageOnLoad = this.imageOnLoad.bind(this);
 	    this.state = {
-	      //isImageDisplayed: false,
+		  //isImageDisplayed: false,
+		  
 	    };
 	}
-
-
 
 	navGridRow(cells, index) {
 		return (
 			<div className='nav-grid-row' key={`nav-grid-row-${index}`}>
 				{ 
-					cells.map((y, j) =>
+					cells.map((y, j) => 
 						<NavGridCell 
 							key={`nav-grid-cell-${y.name}`} 
 							{...y} 
+							isActive={this.props.activeItem === y.categoryId}
 							onCellClick={this.props.onCellClick} 
-						/>
-					) 
+						/>	
+					)
 				}
 			</div>
 		);
 	}
 
 	render() {
-
-		
 		return (
 			<div className='nav-grid' >
 				{ 
@@ -50,6 +48,7 @@ class NavGrid extends React.Component {
 
 NavGrid.propTypes = {
 	navGrid: PropTypes.array.isRequired,
+	activeItem: PropTypes.number.isRequired,
 	onCellClick: PropTypes.func.isRequired,  
 };
 

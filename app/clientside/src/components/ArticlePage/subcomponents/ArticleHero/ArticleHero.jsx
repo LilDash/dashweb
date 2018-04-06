@@ -8,7 +8,7 @@ export class ArticleHero extends React.Component {
 	render() {
 		return (
 			<div className='article-hero'>
-				<LazyloadImage src={this.props.titleImageSrc} preloadColor={this.props.preloadColor} />
+				<LazyloadImage src={this.props.titleImageSrc} preloadColor={this.props.preloadColor} displayLoading={false}/>
 				<div className='article-hero-overlay' />
 				<div className='article-hero-inner'>
 					<h1 className='article-title'>{this.props.title}</h1>

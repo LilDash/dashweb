@@ -9,6 +9,7 @@ import { PostListContainer } from './subcomponents/PostListContainer/PostListCon
 import { PostList } from './subcomponents/PostList/PostList';
 import { SectionBracket } from './subcomponents/SectionBracket/SectionBracket';
 import { Loading } from '../common/Loading/Loading';
+import ScrollUpButton from "react-scroll-up-button"; 
 import 'reset-css/reset.css';
 import '../../styles/default.scss';
 import './home-page.scss';
@@ -89,9 +90,10 @@ export default class HomePage extends React.Component {
         		<Header />
                 <Hero {...this.props.hero} />
         		<div className='home-page-body'>    			
-                    <NavGrid navGrid={this.props.navGrid} onCellClick={this.handleNavCellOnClick.bind(this)} />
+                    <NavGrid navGrid={this.props.navGrid} activeItem={this.state.curCategoryId} onCellClick={this.handleNavCellOnClick.bind(this)} />
                     <PostListContainer posts={this.state.postList} category={this.state.curCategoryTitle} />
                     <div className={'loading-container'}>{ this.state.isPostListLoading ? loading : loadMore }</div>
+                    <ScrollUpButton />
         		</div>
         		<Footer />
         	</div>

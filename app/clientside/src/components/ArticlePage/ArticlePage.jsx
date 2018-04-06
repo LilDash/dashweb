@@ -4,6 +4,7 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { ArticleHero } from './subcomponents/ArticleHero/ArticleHero';
 import { ArticleBody } from './subcomponents/ArticleBody/ArticleBody';
+import { ShareButtons } from '../common/ShareButtons/ShareButtons';
 
 
 import '../../styles/default.scss';
@@ -19,9 +20,7 @@ export default class ArticlePage extends React.Component {
 
     componentDidMount() {
         
-    }
-
-  
+    }  
 
     render() {
         return (
@@ -29,6 +28,7 @@ export default class ArticlePage extends React.Component {
         		<Header />
                 <ArticleHero {...this.props.articleHero} />
                 <ArticleBody {...this.props.articleBody} />
+                <ShareButtons />
         		<Footer />
         	</div>
         );

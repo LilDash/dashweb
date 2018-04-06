@@ -15,7 +15,7 @@ class ApiController @Inject()(cc: ControllerComponents,
                               postService: PostService
                              ) extends AbstractController(cc) {
 
-  val numOfPostPerPage: Int = 1
+  val numOfPostPerPage: Int = 10
 
   /**
     * Create an Action to render an HTML page.

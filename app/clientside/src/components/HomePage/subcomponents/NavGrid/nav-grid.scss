@@ -16,6 +16,7 @@
 		margin: 10px;
 		overflow: hidden;
 		vertical-align: middle;
+		position: relative;
 
 		&-img {
 			width: 100%;
@@ -55,6 +56,22 @@
 			width: 48%;
 		}
 
+		&.active:before {
+			display: inline-block;
+			content: "◆";
+			z-index: 99;
+			position: absolute;
+			color: $grey5;
+			padding-top: 10px;
+			font-size: 84px;
+			height: 16px;
+			width: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: $grey5;
+			line-height: 32px;
+		}
+
 		
 		@media (max-width: $main-width-default) {
 			margin: 5px;
@@ -84,6 +101,10 @@
 	
 			&-2 {
 				width: 45%;
+			}
+
+			&.active:before {
+				padding-top: 0px;
 			}
 		}
 
