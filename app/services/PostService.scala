@@ -23,6 +23,10 @@ class PostService @Inject()(
     PostRepository.save(post)
   }
 
+  def softDeletePost(id: Long): Future[Int] = {
+    PostRepository.softDelete(id)
+  }
+
   def deletePost(id: Long): Future[Int] = {
     PostRepository.delete(id)
   }
@@ -55,9 +59,9 @@ class PostService @Inject()(
     }
   }
 
-  def listAllPosts: Future[Seq[Post]] = {
-    PostRepository.listsAll
-  }
+//  def listAllPosts: Future[Seq[Post]] = {
+//    PostRepository.listsAll
+//  }
 
   def getNLatestPosts(n: Int): Future[Seq[PostDetail]] = {
     PostRepository.getNLatest(n).flatMap { posts: Seq[Post] =>
@@ -74,9 +78,21 @@ class PostService @Inject()(
     }
   }
 
-  def getPostsByCategory(categoryId: Long, page: Int, numPerPage: Int): Future[Seq[PostDetail]] = {
+  def listAllPosts(page: Int, numPerPage: Int): Future[Seq[PostDetail]] = {
     val offset = page * numPerPage
-    PostRepository.getByCategoryId(categoryId, offset, numPerPage).flatMap { posts: Seq[Post] =>
+    PostRepository.getAll(offset, numPerPage).flatMap { posts: Seq[Post] =>
+      val future = posts.map(p => getPostDetail(p))
+      Future.sequence((future))
+    }
+  }
+
+  def getPostsByCategory(
+                          categoryId: Long,
+                          page: Int,
+                          numPerPage: Int,
+                          includeInactive: Boolean = false): Future[Seq[PostDetail]] = {
+    val offset = page * numPerPage
+    PostRepository.getByCategoryId(categoryId, offset, numPerPage, includeInactive).flatMap { posts: Seq[Post] =>
       val future = posts.map(p => getPostDetail(p))
       Future.sequence((future))
     }

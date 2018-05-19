@@ -29,6 +29,10 @@ object PostRepository {
     }
   }
 
+  def softDelete(id: Long): Future[Int] = {
+    dbConfig.db.run(posts.filter(_.id === id).map(c => (c.status)).update((PostStatus.deleted.id)))
+  }
+
   def delete(id: Long): Future[Int] = {
     dbConfig.db.run(posts.filter(_.id === id).delete)
   }
@@ -55,10 +59,25 @@ object PostRepository {
     dbConfig.db.run(action)
   }
 
-  def getByCategoryId(categoryId: Long, offset: Long, count: Int): Future[Seq[Post]] = {
+  def getAll(offset: Long, count: Int): Future[Seq[Post]] = {
     val action = posts.filter(p =>
-      p.status === PostStatus.active.id && p.categoryId === categoryId
+      p.status =!= PostStatus.deleted.id
     ).sortBy(_.id.desc).drop(offset).take(count).result
+    dbConfig.db.run(action)
+  }
+
+  def getByCategoryId(
+                       categoryId: Long,
+                       offset: Long,
+                       count: Int,
+                       includeInactive: Boolean = false): Future[Seq[Post]] = {
+    val filter = if (includeInactive) {
+      (p: PostTableDef) => ( p.status === PostStatus.active.id || p.status === PostStatus.inactive.id ) &&
+        p.categoryId === categoryId;
+    } else {
+      (p: PostTableDef) => p.status === PostStatus.active.id && p.categoryId === categoryId;
+    }
+    val action = posts.filter(filter).sortBy(_.id.desc).drop(offset).take(count).result
     dbConfig.db.run(action)
   }
 }

@@ -6,6 +6,32 @@
  *@
 @(title: String, scripts: Html = Html(""))(content: Html)
 
+@import java.io.File
+@import play.twirl.api.StringInterpolation
+
+@getBundleScripts() = @{
+    val d = new File("./public/dist/scripts")
+    if (d.exists && d.isDirectory) {
+        val files = d.listFiles.filter((f: File) => f.isFile && f.getName.startsWith("main."))
+        if (!files.isEmpty){
+            val src = routes.Assets.versioned("dist/scripts/" + files.head.getName)
+            html"<script src='$src' type='text/javascript' ></script>"
+        }
+    }
+}
+
+@getBundleStyles() = @{
+    val d = new File("./public/dist/styles")
+    if (d.exists && d.isDirectory) {
+        val files = d.listFiles.filter((f: File) => f.isFile && f.getName.startsWith("main."))
+        if (!files.isEmpty){
+            val href = routes.Assets.versioned("dist/styles/" + files.head.getName)
+            html"<link rel='stylesheet' media='screen' href='$href'>"
+        }
+    }
+}
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,13 +39,15 @@
         <title>@title</title>
         <meta charset="utf-8">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("dist/main.css")">
+        @getBundleStyles()
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
         @scripts
     </head>
     <body>
         <div id="app"></div>
-        <script src="@routes.Assets.versioned("dist/main.js")" type="text/javascript"></script>
+        <script crossorigin src="https://unpkg.com/react@@16/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@@16/umd/react-dom.production.min.js"></script>
+        @getBundleScripts()
         <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charSet="utf-8"></script>
     </body>
 </html>

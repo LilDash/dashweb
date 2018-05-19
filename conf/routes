@@ -13,12 +13,14 @@ GET     /api/post/:id               controllers.ApiController.post(id: Long)
 # Admin Api
 GET     /api/admin/getCurrentUser    controllers.AdminController.getCurrentUser
 POST    /api/admin/login            controllers.AdminController.login
-POST    /api/admin/post/select      controllers.AdminController.selectPosts
+# POST    /api/admin/post/select      controllers.AdminController.selectPosts
 POST    /api/admin/post/insert      controllers.AdminController.insertPost
 POST    /api/admin/getUploadFileToken controllers.AdminController.getUploadFileToken
 POST    /api/admin/post/update        controllers.AdminController.updatePost
-GET     /api/admin/post/delete      controllers.AdminController.deletePost
+# GET     /api/admin/post/delete      controllers.AdminController.deletePost
+DELETE  /api/admin/post/:postId        controllers.AdminController.softDelete(postId: Long)
 GET     /api/admin/category/list    controllers.AdminController.getAllCategories
+GET     /api/admin/post/list        controllers.AdminController.listPosts
 
 GET     /api/admin/editor           controllers.AdminController.editor
 POST    /api/admin/editor           controllers.AdminController.editor

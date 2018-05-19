@@ -11,7 +11,7 @@ import akka.http.scaladsl.model.DateTime
 import com.google.common.html.HtmlEscapers
 import common.enums.PostStatus
 import common.utility.{StringUtil, TimeUtil}
-import models.Post
+import models.{Post, PostDetail}
 import org.joda.time
 import org.joda.time.{DateTime, Seconds}
 import play.Play
@@ -61,15 +61,31 @@ class AdminController @Inject()(cc: ControllerComponents,
 
   }
 
-  def selectPosts() = Action.async { implicit request: Request[AnyContent] =>
-    postService.listAllPosts map { posts =>
+//  def selectPosts() = Action.async { implicit request: Request[AnyContent] =>
+//    postService.listAllPosts map { posts =>
+//      val data = Json.obj(
+//        "success" -> true,
+//        "message" -> "",
+//        "total" -> 1,
+//        "data" -> posts
+//      )
+//      Ok(Json.toJson(data))
+//    }
+//  }
+
+  def listPosts() = Action.async { implicit  request: Request[AnyContent] =>
+    val categoryId = request.getQueryString("cid").getOrElse("0").toInt
+    val page = request.getQueryString("p").getOrElse("0").toInt
+    val numOfPostPerPage = 20
+    val postsToJson = (posts: Seq[PostDetail]) => {
       val data = Json.obj(
-        "success" -> true,
-        "message" -> "",
-        "total" -> 1,
-        "data" -> posts
+        "posts" -> posts
       )
       Ok(Json.toJson(data))
+    }
+    categoryId match {
+      case 0 => postService.listAllPosts(page, numOfPostPerPage).map(postsToJson)
+      case categoryId: Int => postService.getPostsByCategory(categoryId, page, numOfPostPerPage, true).map(postsToJson)
     }
   }
 
@@ -146,6 +162,15 @@ class AdminController @Inject()(cc: ControllerComponents,
       Future.successful(Ok(Json.toJson(result)))
     }
 
+  }
+
+  def softDelete(postId: Long) = Action.async { implicit request: Request[AnyContent] =>
+    postService.softDeletePost(postId).map { result: Int =>
+      val resultJson = Json.obj(
+        "success" -> (result > 0)
+      )
+      Ok(Json.toJson(resultJson))
+    }
   }
 
   def deletePost() = Action.async { implicit request: Request[AnyContent] =>
